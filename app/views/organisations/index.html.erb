@@ -17,7 +17,7 @@
       <tr>
         <td><%= organisation.name %></td>
         <td><%= organisation.description %></td>
-        <td><%= organisation.created_by %></td>
+        <td><%= User.find(organisation.created_by).name %></td>
         <td><%= link_to 'Show', organisation %></td>
         <td><%= link_to 'Edit', edit_organisation_path(organisation) %></td>
         <td><%= link_to 'Destroy', organisation, method: :delete, data: { confirm: 'Are you sure?' } %></td>

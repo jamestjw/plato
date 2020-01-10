@@ -6,9 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-
+Organisation.delete_all
 User.delete_all
-
 
 leong = User.create!(name: 'Leong',
     password: 'kaodim',
@@ -29,4 +28,11 @@ seng = User.create!(name: 'Wei Seng',
 nick = User.create!(name: 'Nicolas',
     password: 'kaodim',
     email: 'youknowjamest@gmail.com',
+)
+
+kaodim = Organisation.create!(
+    name: 'Kaodim',
+    description: 'The Kaodim Group is the #1 services marketplace in Southeast Asia, providing a faster, more dependable way to hire professional services you need from plumbers, photographers,cleaners, movers, caterers, wedding planners, yoga instructors and many more.',
+    user: leong,
+    users: [leong, james, seng,  nick]
 )
