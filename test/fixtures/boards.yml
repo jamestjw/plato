@@ -2,11 +2,10 @@
 
 one:
   name: MyString
-  description: MyText
-  user: one 
-  users: [one, two]
+  active: false
+  creator_id: 1
 
 two:
   name: MyString
-  description: MyText
-  user: one
+  active: false
+  creator_id: 1
