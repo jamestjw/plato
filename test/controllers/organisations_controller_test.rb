@@ -34,7 +34,6 @@ class OrganisationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update organisation" do
-    # puts @organisation.created_by
     patch organisation_url(@organisation), params: { organisation: { created_by: @organisation.created_by, description: @organisation.description, name: @organisation.name } }
     assert_redirected_to organisation_url(@organisation)
   end

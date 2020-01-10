@@ -11,3 +11,19 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
 end
+
+class ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+
+  def test_logout!
+    sign_out users(:one)
+  end
+
+  def test_login!
+    login_as users(:one)
+  end
+
+  # def setup
+  #   test_login!
+  # end
+end

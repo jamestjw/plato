@@ -2,6 +2,7 @@ require 'test_helper'
 
 class BoardsControllerTest < ActionDispatch::IntegrationTest
   setup do
+    test_login!
     @board = boards(:one)
   end
 

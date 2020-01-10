@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
 
   get 'users' => 'users#index'
+  
+  delete 'users/:id' => 'users#destroy', :as => :admin_destroy_user
+
   root 'users#index', via: :all
 
   resources :plans

@@ -2,10 +2,17 @@ one:
   name: James Tan
   encrypted_password: <%= Devise::Encryptor.digest(User, 'kaodim') %>
   email: juanwhei@kaodim.com
+  # organisations: [one]
   # user_type: 0
 
 two:
   name: Nicolas Ang
   encrypted_password: <%= Devise::Encryptor.digest(User, 'kaodim') %>
   email: james_tan97@outlook.com
+  # organisations: [one]
   # user_type: 1
+
+three:
+  name: seng
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'kaodim') %>
+  email: seng@outlook.com
