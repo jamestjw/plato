@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>No of users:</strong>
+  <%= @plan.no_of_users %>
+</p>
+
+<p>
+  <strong>Unlimited boards:</strong>
+  <%= @plan.unlimited_boards %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @plan.active %>
+</p>
+
+<p>
+  <strong>Plan type:</strong>
+  <%= @plan.plan_type %>
+</p>
+
+<p>
+  <strong>Monthly price:</strong>
+  <%= @plan.monthly_price %>
+</p>
+
+<p>
+  <strong>Annual price:</strong>
+  <%= @plan.annual_price %>
+</p>
+
+<p>
+  <strong>Additional user price:</strong>
+  <%= @plan.additional_user_price %>
+</p>
+
+<%= link_to 'Edit', edit_plan_path(@plan) %> |
+<%= link_to 'Back', plans_path %>
