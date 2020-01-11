@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  card: one
+  detail: MyString
+  completed: false
+
+two:
+  card: two
+  detail: MyString
+  completed: false
+
+three:
+  card: one
+  detail: MyString
+  completed: false
+
+four:
+  card: one
+  detail: MyString
+  completed: false

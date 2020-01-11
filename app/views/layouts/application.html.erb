@@ -6,6 +6,7 @@
     <%= csp_meta_tag %>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -34,17 +35,27 @@
             <%= link_to 'Boards', boards_path, class: 'nav-link' %>
           </li>
 
+          <li class="nav-item">
+            <%= link_to 'Cards', cards_path, class: 'nav-link' %>
+          </li>
+
+          <% if user_signed_in? %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown
+              My Boards
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
+
+              <% current_user.organisations.first.boards.each do |board| %>
+              <%= link_to board.name, board, class: 'dropdown-item' %> 
+
+              <% end %>
             </div>
           </li>
+          <% end %>
+
+
+
           <li class="nav-item">
             <a class="nav-link disabled" href="#">Disabled</a>
           </li>

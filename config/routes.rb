@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get 'home/index'
+  resources :cards
+  resources :tasks do
+    post :complete, on: :member
+  end
   resources :boards
   resources :organisations
   devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }

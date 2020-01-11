@@ -1,5 +1,7 @@
 class OrganisationsController < ApplicationController
+  skip_before_action :authenticate_user!
   before_action :set_organisation, only: [:show, :edit, :update, :destroy]
+  before_action :delete_organisation_users, only: [:destroy]
 
   # GET /organisations
   # GET /organisations.json
@@ -71,5 +73,11 @@ class OrganisationsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def organisation_params
       params.require(:organisation).permit(:name, :description, :created_by)
+    end
+
+    def delete_organisation_users
+      @organisation.users.each do |user|
+        user.destroy
+      end
     end
 end

@@ -11,6 +11,7 @@ class BoardsController < ApplicationController
   # GET /boards/1
   # GET /boards/1.json
   def show
+    @card = Card.new 
   end
 
   # GET /boards/new
@@ -26,6 +27,7 @@ class BoardsController < ApplicationController
   # POST /boards.json
   def create
     @board = Board.new(board_params)
+    @board.active = true
     @board.organisation = current_user.organisations.first
 
     respond_to do |format|
