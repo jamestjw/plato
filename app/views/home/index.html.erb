@@ -1,25 +1,33 @@
- <% if false %>
- <% @boards.each do |board| %>
-    <p>
-    <strong>Name:</strong>
-    <%= board.name %>
-    </p>
+<% if current_user.organisations.count > 0%>
+    <p>Scroll to the right to see more boards.</p>
+    <div class="deck">
+        <%= render partial: 'boards/board_home', collection: @boards %>
+    </div>
+<% else %>
+    <h3>Subscription plan</h3>
+    
+    <% @organisation = Organisation.new %>
+    <%= javascript_pack_tag("organisation_type") %>
 
-    <p>
-    <strong>Active:</strong>
-    <%= board.active %>
-    </p>
+    <%= form_for(@organisation, url: join_organisations_url(organisation_id: @organisation.id)) do |f| %>
 
-    <p>
-    <strong>Creator:</strong>
-    <%= board.creator_id %>
-    </p>
+        <% if @organisation.errors.any? %>
+            <div id="error_explanation">
+            <h2><%= pluralize(@organisation.errors.count, "error") %> prohibited this from being saved:</h2>
 
-    <h5>Cards:</h5>
-    <%= render board %>
-<% end %>
-<% end %>
+            <ul>
+                <% @organisation.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+                <% end %>
+            </ul>
+            </div>
+        <% end %>
 
-<div class="deck">
-    <%= render partial: 'boards/board_home', collection: @boards %>
-</div>
+        <%= content_tag :div, "", id: 'organisation-type-component', data: Organisation.all.to_json %>
+        
+        <div class="actions">
+            <%= f.submit "Sign up" %>
+        </div>
+    <% end %>
+
+<% end %>    

@@ -6,8 +6,8 @@ class CreatePlans < ActiveRecord::Migration[6.0]
       t.boolean :active, null: false, default: true
       t.integer :plan_type, null: false
       t.float :monthly_price, null: false
-      t.float :annual_price, null: false
-      t.float :additional_user_price, null: false
+      t.float :annual_price
+      t.float :additional_user_price
 
       t.timestamps
     end

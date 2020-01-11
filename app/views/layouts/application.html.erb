@@ -39,7 +39,7 @@
             <%= link_to 'Cards', cards_path, class: 'nav-link' %>
           </li>
 
-          <% if user_signed_in? %>
+          <% if user_signed_in? && current_user.organisations.count > 0 %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               My Boards
@@ -72,41 +72,6 @@
         </p>
       </div>
     </nav>
-
-
-    <% if false %>
-    <div class="sidenav">
-      <div id='defaultnav'>
-        <ul>
-          <li><%= link_to 'Home', todo_index_path %></li>
-          <li><%= link_to 'New Request', new_data_request_path %></li>
-          <li><%= link_to 'All Requests', data_requests_path %></li>
-        </ul>
-      </div>
-
-      <div id='defaultNav'>
-          <ul>
-            <% if session[:user_type] == 'Admin' %>
-            <li><%= link_to 'Users', users_path %></li>
-            <% end %>
-            <li><%= link_to 'Assignations', assignations_path %></li>  
-          </ul>
-      </div>
-      
-      <% if user_signed_in? %>
-      <div id='loggedInNav'>
-          <ul>
-            <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %>         
-          </ul>
-      </div>
-      <% else %>
-      <div id='loggedInNav'>
-          <%= link_to 'Login',  new_user_session_path, method: :get %>
-      </div>
-      <% end %>
-    </div>   
-
-    <% end %>
 
     <div id="main">
       <% if notice %>

@@ -6,8 +6,38 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+Plan.delete_all
 Organisation.delete_all
 User.delete_all
+
+
+plan1 = Plan.create!(
+    no_of_users: 1,
+    unlimited_boards: false,
+    active: true,
+    plan_type: 0,
+    monthly_price: 2,
+)
+
+plan2 = Plan.create!(
+    no_of_users: 5,
+    unlimited_boards: true,
+    active: true,
+    plan_type: 1,
+    monthly_price: 20,
+    annual_price: 18,
+    additional_user_price: 7
+)
+
+plan3 = Plan.create!(
+    no_of_users: 20,
+    unlimited_boards: true,
+    active: true,
+    plan_type: 2,
+    monthly_price: 60,
+    annual_price: 55,
+    additional_user_price: 6
+)
 
 leong = User.create!(name: 'Leong',
     password: 'kaodim',
@@ -31,6 +61,13 @@ nick = User.create!(name: 'Nicolas',
     email: 'youknowjamest@gmail.com',
 )
 
+yaman = User.create!(name: 'Yaman',
+    password: 'kaodim',
+    email: 'yaman@kaodim.com',
+    organisation_owner: true
+)
+
+
 kaodim = Organisation.create!(
     name: 'Kaodim',
     description: 'The Kaodim Group is the #1 services marketplace in Southeast Asia, providing a faster, more dependable way to hire professional services you need from plumbers, photographers,cleaners, movers, caterers, wedding planners, yoga instructors and many more.',
@@ -43,6 +80,13 @@ grab = Organisation.create!(
     description: 'Grab is a technology company offering different ride-hailing transport services, online food delivery and payment solutions. .',
     user: nick,
     users: [seng,  nick]
+)
+
+yamanco = Organisation.create!(
+    name: 'Yaman co',
+    description: 'Yaman co',
+    user: yaman,
+    users: [yaman]
 )
 
 databoard = Board.create!(
@@ -175,4 +219,34 @@ Task.create!(
     card: leongCard2,
     completed: true,
     detail: 'Make maish work'
+)
+
+Subscription.create!(
+    organisation: kaodim,
+    plan: plan2,
+    start_date: Time.now,
+    end_date: 1.year.from_now,
+    duration: (365.days.from_now - Time.now )/1.month,
+    total_cost: 1000,
+    duration_type: 1
+)
+
+Subscription.create!(
+    organisation: grab,
+    plan: plan3,
+    start_date: Time.now,
+    end_date: 1.year.from_now,
+    duration:(365.days.from_now - Time.now )/1.month,
+    total_cost: 800,
+    duration_type: 0
+)
+
+Subscription.create!(
+    organisation: yamanco,
+    plan: plan1,
+    start_date: Time.now,
+    end_date: 1.year.from_now,
+    duration:(365.days.from_now - Time.now )/1.month,
+    total_cost: 800,
+    duration_type: 0
 )

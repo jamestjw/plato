@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Organisation:</strong>
+  <%= @subscription.organisation_id %>
+</p>
+
+<p>
+  <strong>Plan:</strong>
+  <%= @subscription.plan_id %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @subscription.start_date %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @subscription.end_date %>
+</p>
+
+<p>
+  <strong>Duration:</strong>
+  <%= @subscription.duration %>
+</p>
+
+<p>
+  <strong>Total cost:</strong>
+  <%= @subscription.total_cost %>
+</p>
+
+<p>
+  <strong>Duration type:</strong>
+  <%= @subscription.duration_type %>
+</p>
+
+<%= link_to 'Edit', edit_subscription_path(@subscription) %> |
+<%= link_to 'Back', subscriptions_path %>

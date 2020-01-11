@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_11_034355) do
+ActiveRecord::Schema.define(version: 2020_01_11_121523) do
 
   create_table "boards", force: :cascade do |t|
     t.string "name"
@@ -51,10 +51,24 @@ ActiveRecord::Schema.define(version: 2020_01_11_034355) do
     t.boolean "active", default: true, null: false
     t.integer "plan_type", null: false
     t.float "monthly_price", null: false
-    t.float "annual_price", null: false
-    t.float "additional_user_price", null: false
+    t.float "annual_price"
+    t.float "additional_user_price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.integer "organisation_id", null: false
+    t.integer "plan_id", null: false
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.integer "duration"
+    t.float "total_cost"
+    t.integer "duration_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["organisation_id"], name: "index_subscriptions_on_organisation_id"
+    t.index ["plan_id"], name: "index_subscriptions_on_plan_id"
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -81,5 +95,7 @@ ActiveRecord::Schema.define(version: 2020_01_11_034355) do
   end
 
   add_foreign_key "cards", "boards"
+  add_foreign_key "subscriptions", "organisations"
+  add_foreign_key "subscriptions", "plans"
   add_foreign_key "tasks", "cards"
 end

@@ -17,7 +17,7 @@ class OrganisationsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create organisation" do
     assert_difference('Organisation.count') do
-      post organisations_url, params: { organisation: { created_by: @organisation.created_by, description: @organisation.description, name: @organisation.name } }
+      post organisations_url, params: { organisation: { created_by: @organisation.created_by, description: @organisation.description, name:'new organisation'} }
     end
 
     assert_redirected_to organisation_url(Organisation.last)

@@ -1,11 +1,19 @@
 Rails.application.routes.draw do
+  resources :subscriptions
   get 'home/index'
   resources :cards
   resources :tasks do
     post :complete, on: :member
   end
+
   resources :boards
-  resources :organisations
+
+  resources :organisations do
+    collection do
+      post :join
+    end    
+  end
+
   devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
 
   get 'users' => 'users#index'

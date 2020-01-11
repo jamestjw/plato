@@ -64,6 +64,48 @@ class OrganisationsController < ApplicationController
     end
   end
 
+  def join
+    organisation_type = params[:user][:organisation_type]
+    begin
+      User.transaction do 
+        case organisation_type
+        when "New Organisation"
+          org_params = params.require(:user).permit(:new_organisation_name, :new_organisation_description)
+          org = Organisation.new_org(org_params[:new_organisation_name], org_params[:new_organisation_description], current_user)
+          current_user.organisation_owner = true
+          current_user.save!
+        when "Existing"
+          org_params = params.require(:user).permit(:existing_organisation)
+          org = Organisation.find(org_params[:existing_organisation])
+          current_user.organisations << org
+          current_user.save!
+        when "No Organisation"
+          Organisation.new_org('Individual user', 'Individual user', current_user)
+          current_user.organisation_owner = true
+          current_user.save!
+        else
+          respond_to do |format|
+            format.html { redirect_to(root_url, alert: 'Choose a valid organisation plan.') and return }
+            format.json { head :no_content }
+          end  
+        end
+      end
+    rescue 
+      respond_to do |format|
+        format.html { redirect_to(root_url, alert: 'Unsuccessful, wrong parameters were given.') and return }
+        format.json { head :no_content }
+      end   
+    end
+
+    respond_to do |format|
+      format.html { redirect_to root_url, notice: 'Successfully joined organisation.' }
+      format.json { head :no_content }
+    end    
+  end
+
+  class Error < StandardError
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_organisation
@@ -79,5 +121,8 @@ class OrganisationsController < ApplicationController
       @organisation.users.each do |user|
         user.destroy
       end
+    end
+
+    def join_organisations_params  
     end
 end

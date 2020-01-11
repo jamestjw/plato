@@ -11,7 +11,32 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   # def create
-  #   super
+
+  #   User.transaction do 
+  #     organisation_type = params[:user][:organisation_type]
+  #     if organisation_type == ""
+  #       redirect_to(new_user_registration_url, alert: "Choose an organisation type.") and return
+  #     end
+
+  #     super
+
+  #     case organisation_type
+  #     when "New Organisation"
+  #       org_params = params.require(:user).permit(:new_organisation_name, :new_organisation_description)
+  #       Organisation.new_org(org_params[:new_organisation_name], org_params[:new_organisation_description], resource)
+  #       resource.organisation_owner = true
+  #       resource.save!
+  #     when "Existing"
+  #       org_params = params.require(:user).permit(:existing_organisation)
+  #       org = Organisation.find(org_params[:existing_organisation])
+  #       resource.organisations << org
+  #       resource.save!
+  #     when "No Organisation"
+  #       Organisation.new_org('Individual user', 'Individual user', resource)
+  #       resource.organisation_owner = true
+  #       resource.save!
+  #     end
+  #   end
   # end
 
   # GET /resource/edit
@@ -41,9 +66,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   protected
   # If you have extra params to permit, append them to the sanitizer.
     def configure_sign_up_params
-      devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :organisation_ids])
+        devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
     end
-
+  
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_account_update_params
   #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
@@ -59,3 +84,4 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
 end
+
