@@ -13,7 +13,7 @@ two:
   no_of_users: 1
   unlimited_boards: false
   active: false
-  plan_type: 1
+  plan_type: 2
   monthly_price: 1.5
   annual_price: 1.5
   additional_user_price: 1.5

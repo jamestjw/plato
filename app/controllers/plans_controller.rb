@@ -62,6 +62,10 @@ class PlansController < ApplicationController
     end
   end
 
+  rescue_from 'Plan::Error' do |exception|
+    redirect_to plans_url, alert: exception.message
+  end 
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_plan

@@ -17,6 +17,7 @@ plan1 = Plan.create!(
     active: true,
     plan_type: 0,
     monthly_price: 2,
+    annual_price: 2,
 )
 
 plan2 = Plan.create!(
@@ -65,6 +66,11 @@ yaman = User.create!(name: 'Yaman',
     password: 'kaodim',
     email: 'yaman@kaodim.com',
     organisation_owner: true
+)
+
+mark = User.create!(name: 'Mark',
+    password: 'kaodim',
+    email: 'mark@kaodim.com',
 )
 
 

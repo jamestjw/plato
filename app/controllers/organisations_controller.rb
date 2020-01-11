@@ -13,6 +13,7 @@ class OrganisationsController < ApplicationController
   # GET /organisations/1.json
   def show
     @users = @organisation.users
+    @fees = @organisation.subscription_fees
   end
 
   # GET /organisations/new
@@ -71,18 +72,37 @@ class OrganisationsController < ApplicationController
         case organisation_type
         when "New Organisation"
           org_params = params.require(:user).permit(:new_organisation_name, :new_organisation_description)
+          subcription_params = params.require(:user).permit(:new_organisation_plan_type, :new_organisation_duration_type, :new_organisation_end_date)
           org = Organisation.new_org(org_params[:new_organisation_name], org_params[:new_organisation_description], current_user)
+          subscription = Subscription.create!(
+            organisation: org, 
+            plan: Plan.where(plan_type: subcription_params[:new_organisation_plan_type]).first,
+            start_date: Time.now,
+            end_date: subcription_params[:new_organisation_end_date].to_date,
+            duration_type: subcription_params[:new_organisation_duration_type]
+          )
           current_user.organisation_owner = true
           current_user.save!
+
         when "Existing"
           org_params = params.require(:user).permit(:existing_organisation)
           org = Organisation.find(org_params[:existing_organisation])
           current_user.organisations << org
           current_user.save!
+
         when "No Organisation"
-          Organisation.new_org('Individual user', 'Individual user', current_user)
+          org = Organisation.new_org("#{current_user.name} (solo)", 'Individual user', current_user)
+          subcription_params = params.require(:user).permit(:new_organisation_plan_type, :new_organisation_duration_type, :new_organisation_end_date)
+          subscription = Subscription.create!(
+            organisation: org, 
+            plan: Plan.where(plan_type: "Solo").first,
+            start_date: Time.now,
+            end_date: subcription_params[:new_organisation_end_date].to_date,
+            duration_type: subcription_params[:new_organisation_duration_type]
+          )          
           current_user.organisation_owner = true
           current_user.save!
+
         else
           respond_to do |format|
             format.html { redirect_to(root_url, alert: 'Choose a valid organisation plan.') and return }

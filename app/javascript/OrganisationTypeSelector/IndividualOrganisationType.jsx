@@ -2,31 +2,29 @@ import React from 'react';
 
 class IndividualOrganisationType extends React.Component {
     render() {
-        // return (
-        //     <div>
-        //         <div className='field'>
-        //             <label htmlFor="order_credit_card_number">
-        //                 {I18n.t("orders.form.credit_card_pay_type.cc_number")}
-        //             </label>
-        //             <input type="password" 
-        //                     name="order[credit_card_number]" 
-        //                     id="order_credit_card_number" />
-        //         </div>
-        //         <div className='field'>
-        //             <label htmlFor="order_expiration_date">
-        //                 {I18n.t("orders.form.credit_card_pay_type.expiration_date")}
-        //             </label>
-        //             <input type="text" 
-        //                     name="order[expiration_date]" 
-        //                     id="order_expiration_date" 
-        //                     size="9"
-        //                     placeholder="e.g. 03/19" />
-        //         </div>
-        //     </div>
-        // );
         return (
             <div>
-            </div>
+                <div className="field">
+                    <label htmlFor="user_new_organisation_duration_type">
+                        Which subscription plan to choose?
+                    </label>
+                    <select id="user_new_organisation_duration_type" name="user[new_organisation_duration_type]">
+                        <option value="Monthly">
+                            Monthly Package- $2/user/month
+                        </option>
+                        <option value="Annually">
+                            Annual Package - $2/user/month
+                        </option>
+                    </select>
+                </div>
+
+                <div className="field">
+                    <label htmlFor="user_new_organisation_end_date">
+                        End of Subscription
+                    </label>
+                    <input type="date" id="user_new_organisation_end_date" name="user[new_organisation_end_date]" />
+                </div>                 
+            </div> 
         );        
     }
 }

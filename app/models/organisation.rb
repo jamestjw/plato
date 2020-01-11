@@ -19,6 +19,24 @@ class Organisation < ApplicationRecord
         org.user = user
         org.users << user
         org.save!
-        return org
+        org
+    end
+
+    def subscription_fees
+        plan = plans.last
+        num_users = users.count
+        monthly_fees = plan.monthly_price 
+        yearly_fees = plan.annual_price
+
+        if num_users - plan.no_of_users > 0
+            monthly_fees += plan.additional_user_price * (num_users - plan.no_of_users)
+            yearly_fees += plan.additional_user_price * (num_users - plan.no_of_users)
+        end
+
+        yearly_fees *= 12
+        {   
+            monthly: monthly_fees,
+            yearly: yearly_fees
+        }
     end
 end

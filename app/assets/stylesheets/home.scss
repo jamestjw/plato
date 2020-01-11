@@ -3,17 +3,16 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 $gap: 10px;
 
-
 .home {
     #main .container {
-    height: 70vh;
+    height: 80vh;
     display: grid;
   }
 
   .deck {
     display: flex;
     overflow-x: auto;
-    //width: 100%; // This is needed for FF < 54
+    width: 100%; // This is needed for FF < 54
     > * {
       flex: 0 0 auto; // 'rigid' lists
       margin-left: $gap;

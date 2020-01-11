@@ -38,8 +38,8 @@ class PlansControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to plan_url(@plan)
   end
 
-  test "should destroy plan" do
-    assert_difference('Plan.count', -1) do
+  test "should fail to destroy plan" do
+    assert_difference('Plan.count', 0) do
       delete plan_url(@plan)
     end
 

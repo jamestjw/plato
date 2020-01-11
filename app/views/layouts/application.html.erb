@@ -48,7 +48,10 @@
 
               <% current_user.organisations.first.boards.each do |board| %>
               <%= link_to board.name, board, class: 'dropdown-item' %> 
+              <% end %>
 
+              <% if current_user.organisations.first.boards.empty? %>
+              <%= link_to 'Add board...', new_board_path , class: 'dropdown-item'  %>
               <% end %>
             </div>
           </li>
@@ -61,14 +64,20 @@
           </li>
         </ul>
         <p class="navbar-text float-right">
-        <% if user_signed_in? %>
-          Logged in as <strong><%= current_user.name %></strong>.
-          <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-          <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-        <% else %>
-          <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-          <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
-        <% end %>
+          <% if user_signed_in? %>
+            Logged in as <strong>
+            <%= current_user.name %> 
+            <% if current_user.belongs_to_organisation? %>
+              (<%= current_user.organisations.first.plans.first.plan_type %>) 
+            <% end %>
+            </strong> 
+
+            <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
+            <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+          <% else %>
+            <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
+            <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+          <% end %>
         </p>
       </div>
     </nav>

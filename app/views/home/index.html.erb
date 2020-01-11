@@ -1,5 +1,5 @@
-<% if current_user.organisations.count > 0%>
-    <p>Scroll to the right to see more boards.</p>
+<% if current_user.organisations.count > 0%>    
+    <h6>Scroll to the right to see more boards</h6>
     <div class="deck">
         <%= render partial: 'boards/board_home', collection: @boards %>
     </div>

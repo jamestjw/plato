@@ -23,9 +23,45 @@ class NewOrganisationPayType extends React.Component {
                                 id="user_new_organisation_description" 
                                 />
                 </div>
+
+                <div className="field">
+                    <label htmlFor="user_new_organisation_plan_type">
+                        Which enterprise plan to choose?
+                    </label>
+                    <select id="user_new_organisation_plan_type" name="user[new_organisation_plan_type]">
+                        <option value="Startup">
+                            Startup
+                        </option>
+                        <option value="Enterprise">
+                            Enterprise
+                        </option>
+                    </select>
+                </div>       
+
+                <div className="field">
+                    <label htmlFor="user_new_organisation_duration_type">
+                        Which subscription plan to choose?
+                    </label>
+                    <select id="user_new_organisation_duration_type" name="user[new_organisation_duration_type]">
+                        <option value="Monthly">
+                            Monthly Package
+                        </option>
+                        <option value="Annually">
+                            Annual Package
+                        </option>
+                    </select>
+                </div>    
+
+                <div className="field">
+                    <label htmlFor="user_new_organisation_end_date">
+                        End of Subscription
+                    </label>
+                    <input type="date" id="user_new_organisation_end_date" name="user[new_organisation_end_date]" />
+                </div>                
             </div>
         );          
     }
 }
+
 
 export default NewOrganisationPayType;

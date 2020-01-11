@@ -6,4 +6,7 @@ class User < ApplicationRecord
   
   has_and_belongs_to_many :organisations
 
+  def belongs_to_organisation?
+    !organisations.empty?
+  end
 end
