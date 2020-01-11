@@ -13,45 +13,10 @@
   <%= @board.creator_id %>
 </p>
 
-<h5>Cards:</h5>
 
-<%= render @board %>
-
-<h5>Add new card?</h3>
-<%= form_with(model: @card, local: true) do |form| %>
-  <% if @card.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(card.errors.count, "error") %> prohibited this card from being saved:</h2>
-
-      <ul>
-        <% @card.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <%= hidden_field_tag 'card[board_id]', @board.id %>
-
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :color %>
-    <%= form.text_field :color %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+<div class="deck">
+    <%= render partial: 'boards/board_home', object: @board %>
+</div>
 
 
 

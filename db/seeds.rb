@@ -45,7 +45,7 @@ grab = Organisation.create!(
     users: [seng,  nick]
 )
 
-kdboard = Board.create!(
+databoard = Board.create!(
     name: 'Data Team',
     active: true,
     organisation: kaodim
@@ -57,11 +57,35 @@ partyboard = Board.create!(
     organisation: kaodim
 )
 
+illuminatiboard = Board.create!(
+    name: 'Illuminati board',
+    active: true,
+    organisation: kaodim
+)
+
+hrboard = Board.create!(
+    name: 'Human Resources',
+    active: true,
+    organisation: kaodim
+)
+
+Board.create!(
+    name: 'Marketing',
+    active: true,
+    organisation: kaodim
+)
+
+Board.create!(
+    name: 'Vendor Engagement',
+    active: true,
+    organisation: kaodim
+)
+
 nickCard = Card.create!(
     title: 'Surcharge',
     color: 'red',
     description: 'Make sure implementation of surcharge finishes on time.',
-    board: kdboard
+    board: databoard
 )
 
 Task.create!(
@@ -90,7 +114,7 @@ leongCard = Card.create!(
     title: 'GMV',
     color: 'red',
     description: 'Make sure GMV increases 50%.',
-    board: kdboard
+    board: databoard
 )
 
 Task.create!(

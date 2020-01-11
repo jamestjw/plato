@@ -1,0 +1,32 @@
+<div class="">
+    <div class="card border-dark" >
+        <div class="card-header">
+            <h5 class="card-title"><%= board_home.name %></h5>
+        </div>
+
+        <% if board_home.cards.count > 0 %>
+            <ul class="list-group list-group-flush">
+                <% board_home.cards.order(created_at: :desc).each do |card| %>
+                    <li class="list-group-item">
+                        <%= link_to(card) do %>
+                            <%= card.title %>
+                            <%= card.tasks.where(completed: true).count%>/<%= card.tasks.count%> tasks <i class="fas fa-check" %></i>
+                        <% end %>
+                    </li>
+                <% end %>
+            </ul>
+        <% else %>
+            <div class="card-body">
+                <p class="card-text">No cards yet.</p>
+            </div>
+        <% end %>
+
+        <div class="card-footer text-muted">
+            <p class="card-text">Active: <%= board_home.active %></p>
+            <%= link_to(new_card_url board_id: board_home.id) do %>
+                <p class="">Add card <i class="fa fa-plus" aria-hidden="true"></i></p>
+            <% end %>
+            <small class="text-muted">Last updated at <%= board_home.updated_at %></small>
+        </div>    
+    </div>
+</div>    

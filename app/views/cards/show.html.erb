@@ -1,24 +1,50 @@
-<p id="notice"><%= notice %></p>
+<div class='card border-primary col-sm-6'>
+    <div class="card-body">
+        <h5 class="card-title"><%= @card.title %></h5> 
+        <h6 class="card-subtitle mb-2 text-muted"> <%= @card.description %></h6>
 
-<p>
-  <strong>Board:</strong>
-  <%= @card.board_id %>
-</p>
+        <p> <h6>Tasks:</h6></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @card.title %>
-</p>
+        <ul class="list-group list-group-flush">
+            <% @card.tasks.each do |task| %>
+            <li class="list-group-item">
+                <%= task.detail %>
+                <% if task.completed %>
+                    <%= link_to '', complete_task_path(task), method: :post, class:"fas fa-check" %>
+                <% else %>    
+                    <%= link_to '', complete_task_path(task), method: :post, class:"fas fa-times" %>
+                <% end %>
+            </li>
+            <% end %>
+        </ul>            
 
-<p>
-  <strong>Description:</strong>
-  <%= @card.description %>
-</p>
+        <p><h6>Add task?</h6></p>
+        <% task = Task.new %>
+        <%= form_with(model: task, local: true) do |form| %>
+        <% if task.errors.any? %>
+            <div id="error_explanation">
+            <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
 
-<p>
-  <strong>Color:</strong>
-  <%= @card.color %>
-</p>
+            <ul>
+                <% task.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+                <% end %>
+            </ul>
+            </div>
+        <% end %>
 
-<%= link_to 'Edit', edit_card_path(@card) %> |
-<%= link_to 'Back', cards_path %>
+        <%= hidden_field_tag 'task[card_id]', @card.id %>
+
+        <div class="field">
+            <%= form.label :detail %>
+            <%= form.text_field :detail %>
+        </div>
+
+        <div class="actions">
+            <%= form.submit %>
+        </div>
+        <% end %>
+
+        <br>
+    </div>   
+</div>

@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   
   delete 'users/:id' => 'users#destroy', :as => :admin_destroy_user
 
-  root 'users#index', via: :all
+  root 'home#index', via: :all
 
   resources :plans
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
