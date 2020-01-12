@@ -10,4 +10,4 @@ two:
   name: MyString2
   description: MyText
   user: three
-  users: two,three
+  users: two, three, four

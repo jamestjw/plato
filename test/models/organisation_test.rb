@@ -5,7 +5,7 @@ class OrganisationTest < ActiveSupport::TestCase
     @organisation = organisations(:one)
   end
 
-  test "has 2 users" do
+  test "has 1 users" do
     assert_equal @organisation.users.count, 1
   end
 

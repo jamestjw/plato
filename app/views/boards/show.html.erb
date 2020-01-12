@@ -18,6 +18,34 @@
     <%= render partial: 'boards/board_home', object: @board %>
 </div>
 
+<br>
+
+<div>
+  <p>
+    <strong>Users assigned:</strong>
+  </p>
+
+  <% if @board.users.empty? %>
+    <p>No users assigned yet.</p>
+  <% else %>
+    <ul class="list-group">
+      <% @board.users.each do |user| %>
+        <li class="list-group-item">
+          <%= user.name %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
+
+<br>
+
+<div>
+  <p>
+    <strong>Assign user to this board:</strong>
+  </p>
+  <%= render :partial => "board_users/form", locals: {board_user: BoardUser.new, board: @board}  %>
+</div>
 
 
 <%= link_to 'Edit', edit_board_path(@board) %> |

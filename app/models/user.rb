@@ -6,6 +6,7 @@ class User < ApplicationRecord
   devise :omniauthable, omniauth_providers: %i[facebook]   
   
   has_and_belongs_to_many :organisations
+  has_many :board_users, dependent: :destroy
 
   def belongs_to_organisation?
     !organisations.empty?

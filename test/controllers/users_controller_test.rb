@@ -1,17 +1,26 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
-  # @user = users(:one)
   setup do
     @user = users(:one)
   end
 
-  test "should get index" do
+  test "should get index (admin)" do
+    test_admin_login!
     get users_url
     assert_response :success
   end  
 
+  test "should fail to get index (user)" do
+    test_login!
+    get users_url
+    assert_redirected_to new_admin_session_url
+  end  
 
+  test "should fail to get index (no login)" do
+    get users_url
+    assert_redirected_to new_admin_session_url
+  end  
 
   test "should get new" do
     

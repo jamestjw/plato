@@ -13,10 +13,12 @@
                         <%= link_to(card) do %>
                             <span>
                                 <%= card.title %>
-                                <%= card.tasks.where(completed: true).count%>/<%= card.tasks.count%> tasks <i class="fas fa-check" %></i>
-                            </span>
-                            <%= link_to '', card_path(card), method: :delete, class:"fas fa-trash-alt right" %>
-                        <% end %>
+                            </span>                             
+                        <% end %>   
+                        <span class='right'>
+                            <%= card.tasks.where(completed: true).count%>/<%= card.tasks.count%> tasks <i class="fas fa-check" %></i>
+                            <%= link_to '', card_path(card), method: :delete, class:"fas fa-trash-alt" %>
+                        </span>                                            
                     </li>
                 <% end %>
             </ul>
@@ -28,10 +30,11 @@
 
         <div class="card-footer text-muted">
             <p class="card-text">Active: <%= board_home.active %></p>
+            <p class="card-text">Number assignees: <%= board_home.users.count %></p>
+
             <%= link_to(new_card_url board_id: board_home.id) do %>
                 <p class="">Add card  <i class="fa fa-plus" aria-hidden="true"></i></p>
             <% end %>
-
             <%= link_to(activate_board_path(board_home), method: :post) do %>
                 <p class="">Toggle board activation <i class="fa fa-power-off" aria-hidden="true"></i></p>
             <% end %>
