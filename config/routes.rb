@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   end  
 
   devise_for :admins, controllers: { sessions: 'admins/sessions', registrations: 'admins/registrations' }
-  devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
+  devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations', omniauth_callbacks: 'users/omniauth_callbacks' }
 
   get 'users' => 'users#index'
   get 'home/index'

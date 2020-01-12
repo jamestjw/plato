@@ -59,7 +59,7 @@ seng = User.create!(name: 'Wei Seng',
 
 nick = User.create!(name: 'Nicolas',
     password: 'kaodim',
-    email: 'youknowjamest@gmail.com',
+    email: 'nicolas@gmail.com',
 )
 
 yaman = User.create!(name: 'Yaman',
