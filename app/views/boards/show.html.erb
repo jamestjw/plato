@@ -29,9 +29,10 @@
     <p>No users assigned yet.</p>
   <% else %>
     <ul class="list-group">
-      <% @board.users.each do |user| %>
+      <% @board.board_users.each do |board_user| %>
         <li class="list-group-item">
-          <%= user.name %>
+          <%= board_user.user.name %>
+          <%= link_to '', board_user_path(board_user), method: :delete, class:"fas fa-trash-alt right" %>
         </li>
       <% end %>
     </ul>
