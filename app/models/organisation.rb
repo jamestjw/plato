@@ -7,7 +7,6 @@ class Organisation < ApplicationRecord
     has_many :subscriptions, dependent: :destroy
     has_many :plans, through: :subscriptions
 
-
     validates :name, :description, :created_by, presence: true
     validates :name, uniqueness: {unique: true}    
     

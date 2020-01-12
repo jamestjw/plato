@@ -1,24 +1,38 @@
-# README
+# plato
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Dependencies 
+```
+Gemfile
+-----------------------------
+ruby '2.6.3'
+gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
 
-Things you may want to cover:
+# Authentication 
+gem 'devise'
 
-* Ruby version
+# Facebook OAuth2
+gem 'omniauth-facebook'
 
-* System dependencies
 
-* Configuration
+package.json
+-----------------------------
+"react": "^16.12.0",
+"react-dom": "^16.12.0",
+```
 
-* Database creation
+## Set up the application. 
+note: seeding the database is necessary, as subscription plans will be loaded then
+```
+git clone https://github.com/jamestjw/plato.git
+bundle install 
+yarn install --check-files
+rails db:migrate
+rails db:seed
+rails server
+```
 
-* Database initialization
+## Explore deployed application
+Visit it [here](https://safe-fjord-82834.herokuapp.com/). Best viewed on Google Chrome.
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## More details
+Check out the wiki for more in depth explanations and documentation of application behaviour.
