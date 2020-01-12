@@ -1,5 +1,13 @@
 class CardsController < ApplicationController
+  before_action :authenticate_admin!, only: :index
+
+  skip_before_action :authenticate_user!
+  before_action :authenticate_user!, unless: :admin_signed_in?
+  
   before_action :set_card, only: [:show, :edit, :update, :destroy]
+  before_action only: [:show, :edit, :update, :destroy] do
+    owns_organisation(@card.board.organisation)
+  end
 
   # GET /cards
   # GET /cards.json

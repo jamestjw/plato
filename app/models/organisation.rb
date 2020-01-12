@@ -54,4 +54,8 @@ class Organisation < ApplicationRecord
             yearly: yearly_fees
         }
     end
+
+    def contains_user?(userobj)
+        users.include?(userobj)
+    end
 end

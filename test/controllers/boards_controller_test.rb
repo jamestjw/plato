@@ -6,7 +6,14 @@ class BoardsControllerTest < ActionDispatch::IntegrationTest
     @board = boards(:one)
   end
 
-  test "should get index" do
+  test "should fail to get index as normal user" do
+    get boards_url
+    assert_redirected_to new_admin_session_url
+  end
+
+  test "should succeed to get index as admin" do
+    test_logout!
+    test_admin_login!
     get boards_url
     assert_response :success
   end

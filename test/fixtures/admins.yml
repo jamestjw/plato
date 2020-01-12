@@ -1,0 +1,13 @@
+one:
+  name: admin1
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'kaodim') %>
+  email: admin1@kaodim.com
+  # organisations: [one]
+  # user_type: 0
+
+two:
+  name: admin2
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'kaodim') %>
+  email: admin2@kaodim.com
+  # organisations: [one]
+  # user_type: 1

@@ -133,7 +133,7 @@ Board.create!(
 
 nickCard = Card.create!(
     title: 'Surcharge',
-    color: 'red',
+    color: 'blue',
     description: 'Make sure implementation of surcharge finishes on time.',
     board: databoard
 )
@@ -210,7 +210,7 @@ Task.create!(
 
 leongCard2 = Card.create!(
     title: 'GMV',
-    color: 'red',
+    color: 'yellow',
     description: 'Make sure GMV increases 50%.',
     board: partyboard
 )
@@ -255,4 +255,10 @@ Subscription.create!(
     duration:(365.days.from_now - Time.now )/1.month,
     total_cost: 800,
     duration_type: 0
+)
+
+
+Admin.create!(name: 'Admin1',
+    password: 'kaodim',
+    email: 'admin1@kaodim.com',
 )

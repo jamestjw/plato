@@ -6,8 +6,15 @@ class CardsControllerTest < ActionDispatch::IntegrationTest
     @card = cards(:one)
   end
 
-  test "should get index" do
-    get cards_url
+  test "should fail to get index as normal user" do
+    get boards_url
+    assert_redirected_to new_admin_session_url
+  end
+
+  test "should succeed to get index as admin" do
+    test_logout!
+    test_admin_login!
+    get boards_url
     assert_response :success
   end
 

@@ -1,5 +1,13 @@
 class TasksController < ApplicationController
+  before_action :authenticate_admin!, only: :index
+
+  skip_before_action :authenticate_user!
+  before_action :authenticate_user!, unless: :admin_signed_in?
+  
   before_action :set_task, only: [:show, :edit, :update, :destroy, :complete]
+  before_action only: [:show, :edit, :update, :destroy] do
+    owns_organisation(@task.card.board.organisation)
+  end
 
   # GET /tasks
   # GET /tasks.json

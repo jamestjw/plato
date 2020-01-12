@@ -1,4 +1,4 @@
-<% if current_user.organisations.count > 0%>    
+<% if admin_signed_in? || current_user.organisations.count > 0%>    
 
     <h6>Scroll to the right to see more boards</h6>
     <div class="deck">

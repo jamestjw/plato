@@ -1,6 +1,13 @@
 class BoardsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :set_board, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_admin!, only: :index
+
+  skip_before_action :authenticate_user!
+  before_action :authenticate_user!, unless: :admin_signed_in?
+
+  before_action :set_board, only: [:show, :edit, :update, :destroy, :activate]
+  before_action only: [:show, :edit, :update, :destroy, :activate] do
+    owns_organisation(@board.organisation)
+  end
 
   # GET /boards
   # GET /boards.json
@@ -63,6 +70,19 @@ class BoardsController < ApplicationController
       format.html { redirect_to boards_url, notice: 'Board was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def activate
+    @board.active = !@board.active
+    respond_to do |format|
+      if @board.save
+        format.html { redirect_back(fallback_location: board_path(@board)) }
+        format.json { render :show, status: :ok, location: @task }
+      else
+        format.html { render :edit }
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+      end
+    end    
   end
 
   private

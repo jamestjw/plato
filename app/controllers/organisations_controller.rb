@@ -1,6 +1,14 @@
 class OrganisationsController < ApplicationController
+  before_action :authenticate_admin!, only: :index
+
   skip_before_action :authenticate_user!
+  before_action :authenticate_user!, unless: :admin_signed_in?
+  
   before_action :set_organisation, only: [:show, :edit, :update, :destroy]
+  before_action only: [:show, :edit, :update, :destroy] do
+    owns_organisation(@organisation)
+  end
+
   before_action :delete_organisation_users, only: [:destroy]
 
   # GET /organisations
