@@ -25,6 +25,13 @@
 </p>
 
 <p>
+  <strong>Num boards:</strong>
+  <ul>
+    <%= @organisation.boards.count %>
+  </ul>
+</p>
+
+<p>
   <strong>Payment:</strong>
   <ul>
     <li>Monthly: <%= number_to_currency(@fees[:monthly]) %> </li>

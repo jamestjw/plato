@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-    @boards = Board.all
+    @boards = Board.where(organisation: current_user.organisations.first)
   end
 end

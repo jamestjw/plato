@@ -8,12 +8,15 @@
         <ul class="list-group list-group-flush">
             <% @card.tasks.each do |task| %>
             <li class="list-group-item">
-                <%= task.detail %>
-                <% if task.completed %>
-                    <%= link_to '', complete_task_path(task), method: :post, class:"fas fa-check" %>
-                <% else %>    
-                    <%= link_to '', complete_task_path(task), method: :post, class:"fas fa-times" %>
-                <% end %>
+                <span><%= task.detail %></span>
+                <span class='right'>
+                    <% if task.completed %>
+                        <%= link_to '', complete_task_path(task), method: :post, class:"fas fa-check" %>
+                    <% else %>    
+                        <%= link_to '', complete_task_path(task), method: :post, class:"fas fa-times" %>
+                    <% end %>  
+                    <%= link_to '', task_path(task), method: :delete, class:"fas fa-trash-alt" %>
+                </span>
             </li>
             <% end %>
         </ul>            

@@ -2,6 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 $gap: 10px;
+$list-width: 300px;
 
 .home {
     #main .container {
@@ -20,6 +21,14 @@ $gap: 10px;
     &::after {
       content: '';
       flex: 0 0 $gap;
+    }
+
+    .card {
+      width: $list-width;
+    }
+
+    #new-board {
+      align-items: center;
     }
   }
 }

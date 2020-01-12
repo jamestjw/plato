@@ -21,7 +21,7 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
       post tasks_url, params: { task: { completed: false, detail: 'lololol', card_id: @task.card_id } }
     end
 
-    assert_redirected_to task_url(Task.last)
+    assert_redirected_to card_url(Task.last.card)
   end
 
   test "should show task" do
@@ -40,10 +40,11 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy task" do
+    card = @task.card
     assert_difference('Task.count', -1) do
       delete task_url(@task)
     end
 
-    assert_redirected_to tasks_url
+    assert_redirected_to card_url(card)
   end
 end

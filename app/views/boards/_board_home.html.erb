@@ -9,8 +9,11 @@
                 <% board_home.cards.order(created_at: :desc).each do |card| %>
                     <li class="list-group-item">
                         <%= link_to(card) do %>
-                            <%= card.title %>
-                            <%= card.tasks.where(completed: true).count%>/<%= card.tasks.count%> tasks <i class="fas fa-check" %></i>
+                            <span>
+                                <%= card.title %>
+                                <%= card.tasks.where(completed: true).count%>/<%= card.tasks.count%> tasks <i class="fas fa-check" %></i>
+                            </span>
+                            <%= link_to '', card_path(card), method: :delete, class:"fas fa-trash-alt right" %>
                         <% end %>
                     </li>
                 <% end %>
@@ -23,10 +26,13 @@
 
         <div class="card-footer text-muted">
             <p class="card-text">Active: <%= board_home.active %></p>
-            <%= link_to(new_card_url board_id: board_home.id) do %>
+            <%= link_to(new_card_url, board_id: board_home.id) do %>
                 <p class="">Add card <i class="fa fa-plus" aria-hidden="true"></i></p>
             <% end %>
+
+            <% if false %>
             <small class="text-muted">Last updated at <%= board_home.updated_at %></small>
+            <% end %>
         </div>    
     </div>
 </div>    

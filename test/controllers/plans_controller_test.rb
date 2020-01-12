@@ -2,7 +2,7 @@ require 'test_helper'
 
 class PlansControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @plan = plans(:one)
+    @plan = plans(:solo)
   end
 
   test "should get index" do

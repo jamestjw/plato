@@ -4,11 +4,10 @@ one:
   name: MyString1
   description: MyText
   user: one 
-  users: one, two
+  users: one
 
 two:
   name: MyString2
   description: MyText
   user: three
-  users: three
-
+  users: two,three

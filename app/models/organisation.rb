@@ -8,7 +8,7 @@ class Organisation < ApplicationRecord
     has_many :plans, through: :subscriptions
 
 
-    validates :name, :description, presence: true
+    validates :name, :description, :created_by, presence: true
     validates :name, uniqueness: {unique: true}    
     
 
@@ -22,6 +22,16 @@ class Organisation < ApplicationRecord
         org
     end
 
+    def full?
+        plan = plans.last
+        num_users = users.count
+        if (num_users >= plan.no_of_users) && plan.additional_user_price.nil?
+            true
+        else
+            false
+        end
+    end
+
     def subscription_fees
         plan = plans.last
         num_users = users.count
@@ -31,6 +41,11 @@ class Organisation < ApplicationRecord
         if num_users - plan.no_of_users > 0
             monthly_fees += plan.additional_user_price * (num_users - plan.no_of_users)
             yearly_fees += plan.additional_user_price * (num_users - plan.no_of_users)
+        end
+
+        unless plan.unlimited_boards 
+            monthly_fees *= boards.count
+            yearly_fees *= boards.count
         end
 
         yearly_fees *= 12

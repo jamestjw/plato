@@ -229,7 +229,7 @@ Task.create!(
 
 Subscription.create!(
     organisation: kaodim,
-    plan: plan2,
+    plan: plan3,
     start_date: Time.now,
     end_date: 1.year.from_now,
     duration: (365.days.from_now - Time.now )/1.month,
@@ -239,7 +239,7 @@ Subscription.create!(
 
 Subscription.create!(
     organisation: grab,
-    plan: plan3,
+    plan: plan2,
     start_date: Time.now,
     end_date: 1.year.from_now,
     duration:(365.days.from_now - Time.now )/1.month,

@@ -1,19 +1,27 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+solo:
   no_of_users: 1
   unlimited_boards: false
+  active: false
+  plan_type: 0
+  monthly_price: 2
+  annual_price: 2
+
+startup:
+  no_of_users: 5
+  unlimited_boards: true
   active: false
   plan_type: 1
-  monthly_price: 1.5
-  annual_price: 1.5
-  additional_user_price: 1.5
+  monthly_price: 20
+  annual_price: 18
+  additional_user_price: 7
 
-two:
-  no_of_users: 1
-  unlimited_boards: false
+enterprise:
+  no_of_users: 20
+  unlimited_boards: true
   active: false
   plan_type: 2
-  monthly_price: 1.5
-  annual_price: 1.5
-  additional_user_price: 1.5
+  monthly_price: 60
+  annual_price: 55
+  additional_user_price: 6

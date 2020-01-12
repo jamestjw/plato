@@ -2,18 +2,27 @@
 
 one:
   organisation: one
-  plan: one
+  plan: solo
   start_date: 2020-01-11 20:15:23
-  end_date: 2020-01-11 20:15:23
+  end_date: 2020-12-31 20:15:23
   duration: 1
   total_cost: 1.5
   duration_type: 1
 
 two:
   organisation: two
-  plan: two
+  plan: startup
   start_date: 2020-01-11 20:15:23
-  end_date: 2020-01-11 20:15:23
+  end_date: 2020-12-31 20:15:23
   duration: 1
   total_cost: 1.5
   duration_type: 1
+
+# two:
+#   organisation: three
+#   plan: enterprise
+#   start_date: 2020-01-11 20:15:23
+#   end_date: 2020-01-11 20:15:23
+#   duration: 1
+#   total_cost: 1.5
+#   duration_type: 1

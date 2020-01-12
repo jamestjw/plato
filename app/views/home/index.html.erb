@@ -1,8 +1,27 @@
 <% if current_user.organisations.count > 0%>    
+
     <h6>Scroll to the right to see more boards</h6>
     <div class="deck">
         <%= render partial: 'boards/board_home', collection: @boards %>
+
+        <div class="">
+            <div class="card border-dark" >
+                <div class="card-header">
+                    <h5 class="card-title">Create a new board?</h5>
+                </div>
+                <div class='card-body'>
+                    <%= link_to(new_board_url) do %>
+                        <div class="d-flex justify-content-center">
+                            <i class="fa fa-plus fa-5x" aria-hidden="true"></i>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>    
+        
     </div>
+
+
 <% else %>
     <h3>Subscription plan</h3>
     

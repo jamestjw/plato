@@ -40,10 +40,11 @@ class CardsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy card" do
+    board = @card.board
     assert_difference('Card.count', -1) do
       delete card_url(@card)
     end
 
-    assert_redirected_to cards_url
+    assert_redirected_to board_url(board)
   end
 end

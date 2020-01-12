@@ -14,6 +14,7 @@ class OrganisationsController < ApplicationController
   def show
     @users = @organisation.users
     @fees = @organisation.subscription_fees
+    # @max_boards = @organisation.plans.last.num
   end
 
   # GET /organisations/new
@@ -87,6 +88,9 @@ class OrganisationsController < ApplicationController
         when "Existing"
           org_params = params.require(:user).permit(:existing_organisation)
           org = Organisation.find(org_params[:existing_organisation])
+          if org.full?
+            raise Error.new "This organisation is already full."
+          end
           current_user.organisations << org
           current_user.save!
 
@@ -110,9 +114,9 @@ class OrganisationsController < ApplicationController
           end  
         end
       end
-    rescue 
+    rescue => error
       respond_to do |format|
-        format.html { redirect_to(root_url, alert: 'Unsuccessful, wrong parameters were given.') and return }
+        format.html { redirect_to(root_url, alert: error) and return }
         format.json { head :no_content }
       end   
     end
@@ -141,8 +145,5 @@ class OrganisationsController < ApplicationController
       @organisation.users.each do |user|
         user.destroy
       end
-    end
-
-    def join_organisations_params  
     end
 end

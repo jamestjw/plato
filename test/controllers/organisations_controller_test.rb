@@ -45,4 +45,93 @@ class OrganisationsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to organisations_url
   end
+
+  test "should fail to join organisation (not logged in)" do
+    org_count = Organisation.count
+    assert_difference('Subscription.count', 0 ) do
+      post '/organisations/join', params: { "user"=>{
+        "organisation_type"=>"New Organisation", 
+        "new_organisation_name"=>"Daniel company", 
+        "new_organisation_description"=>"lorem ipsim dolor sit amet",
+        "new_organisation_plan_type"=>"Startup", 
+        "new_organisation_duration_type"=>"Monthly", 
+        "new_organisation_end_date"=>"2020-01-18"
+        } 
+      }    
+    end
+    assert_equal org_count, Organisation.count
+  end
+
+  test "should succeed to join new organisation (logged in)" do
+    login_as users(:newUser)
+    org_count = Organisation.count
+    assert_difference('Subscription.count', 1) do
+      post '/organisations/join', params: { "user"=>{
+        "organisation_type"=>"New Organisation", 
+        "new_organisation_name"=>"Daniel company", 
+        "new_organisation_description"=>"lorem ipsum dolor sit amet",
+        "new_organisation_plan_type"=>"Startup", 
+        "new_organisation_duration_type"=>"Monthly", 
+        "new_organisation_end_date"=>"2020-01-18"
+        } 
+      }    
+    end
+    assert_equal org_count + 1, Organisation.count
+  end
+
+  test "should succeed to join existing organisation (logged in)" do
+    # no new subscription or organisation when joining existing organisation
+    login_as users(:newUser)
+    org_count = Organisation.count
+    org = organisations(:two)
+    org_user_count = org.users.count
+
+    assert_difference('Subscription.count', 0) do
+      post '/organisations/join', params: { "user"=>{
+        "organisation_type"=>"Existing", 
+        "existing_organisation"=> org.id, 
+        } 
+      }    
+    end
+    assert_equal org_count, Organisation.count
+    assert_equal org_user_count + 1, org.users.count
+  end
+
+  test "should fail to join existing but full organisation (logged in)" do
+    # no new subscription or organisation when joining existing organisation
+    login_as users(:newUser)
+    org_count = Organisation.count
+    org = organisations(:one)
+    org_user_count = org.users.count
+
+    assert_difference('Subscription.count', 0) do
+      post '/organisations/join', params: { "user"=>{
+        "organisation_type"=>"Existing", 
+        "existing_organisation"=> org.id, 
+        } 
+      }    
+    end
+    assert_equal org_count, Organisation.count
+    assert_equal org_user_count , org.users.count
+    follow_redirect! 
+    assert_select "p#alert", "This organisation is already full."
+  end
+
+  test "should succeed to create new solo organisation (logged in)" do
+    login_as users(:newUser)
+    org_count = Organisation.count
+    assert_difference('Subscription.count', 1) do
+      post '/organisations/join', params: { "user"=>{
+        "organisation_type"=>"New Organisation", 
+        "new_organisation_name"=>"Daniel company", 
+        "new_organisation_description"=>"lorem ipsum dolor sit amet",
+        "new_organisation_plan_type"=>"Solo", 
+        "new_organisation_duration_type"=>"Monthly", 
+        "new_organisation_end_date"=>"2020-01-18"
+        } 
+      }    
+    end
+    assert_equal org_count + 1, Organisation.count
+    assert Organisation.last.full?
+  end 
 end

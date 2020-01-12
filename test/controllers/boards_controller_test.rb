@@ -21,7 +21,7 @@ class BoardsControllerTest < ActionDispatch::IntegrationTest
       post boards_url, params: { board: { active: @board.active, creator_id: @board.creator_id, name: @board.name } }
     end
 
-    assert_redirected_to board_url(Board.last)
+    assert_redirected_to root_url
   end
 
   test "should show board" do

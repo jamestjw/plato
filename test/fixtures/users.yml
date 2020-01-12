@@ -16,3 +16,8 @@ three:
   name: seng
   encrypted_password: <%= Devise::Encryptor.digest(User, 'kaodim') %>
   email: seng@outlook.com
+
+newUser:
+  name: daniel
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'kaodim') %>
+  email: daniel@kaodim.com
