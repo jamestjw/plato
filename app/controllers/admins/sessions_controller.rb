@@ -3,6 +3,7 @@
 class Admins::SessionsController < Devise::SessionsController
   include Accessible
   skip_before_action :check_user, only: :destroy
+  before_action :check_user_login, only: [:new, :create]
 
   # before_action :configure_sign_in_params, only: [:create]
 
@@ -27,4 +28,10 @@ class Admins::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
+  private 
+  def check_user_login
+    if user_signed_in?
+      redirect_to root_url, alert: 'You are already logged in as user.'
+    end
+  end
 end

@@ -65,7 +65,7 @@ class UserStoriesTest < ActionDispatch::IntegrationTest
       # redirected to login
       assert_redirected_to '/users/sign_in'
       follow_redirect!
-      assert_select 'a.navbar-link', 'Login'
+      assert_select 'a.navbar-link', 'User Login'
       assert_select 'a.navbar-link', 'Sign up'
   end
 

@@ -3,6 +3,7 @@
 class Admins::RegistrationsController < Devise::RegistrationsController
   include Accessible
   skip_before_action :check_user, except: [:new, :create]
+  before_action :prevent_admin_creation, only: [:new, :create]
 
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
@@ -62,4 +63,8 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+  private
+  def prevent_admin_creation
+    redirect_to new_user_registration_url, alert: 'You are not allowed to create admins!!! Signup as user instead.'
+  end
 end
