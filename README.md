@@ -24,12 +24,19 @@ package.json
 note: seeding the database is necessary, as subscription plans will be loaded then
 ```
 git clone https://github.com/jamestjw/plato.git
+cd plato
 bundle install 
 yarn install --check-files
 rails db:migrate
 rails db:seed
 rails server
 ```
+
+## Tests
+To run all tests (model, controller and integration tests).
+```
+rails test
+``` 
 
 ## Explore deployed application
 Visit it [here](https://safe-fjord-82834.herokuapp.com/). Best viewed on Google Chrome.
