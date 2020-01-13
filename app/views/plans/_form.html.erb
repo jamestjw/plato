@@ -28,7 +28,7 @@
 
   <div class="field">
     <%= form.label :plan_type %>
-    <%= form.number_field :plan_type %>
+    <%= form.select :plan_type, Plan.plan_types.keys, id: :plan_plan_type %>
   </div>
 
   <div class="field">

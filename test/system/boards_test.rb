@@ -1,6 +1,7 @@
 require "application_system_test_case"
 
 class BoardsTest < ApplicationSystemTestCase
+  include ActiveJob::TestHelper
   setup do
     @board = boards(:one)
   end
@@ -15,20 +16,19 @@ class BoardsTest < ApplicationSystemTestCase
     click_on "New Board"
 
     check "Active" if @board.active
-    fill_in "Creator", with: @board.creator_id
+    # fill_in "Creator", with: @board.creator_id
     fill_in "Name", with: @board.name
     click_on "Create Board"
 
     assert_text "Board was successfully created"
-    click_on "Back"
   end
 
   test "updating a Board" do
     visit boards_url
-    click_on "Edit", match: :first
+    click_on "Edit", match: :first, exact: true
 
     check "Active" if @board.active
-    fill_in "Creator", with: @board.creator_id
+    # fill_in "Creator", with: @board.creator_id
     fill_in "Name", with: @board.name
     click_on "Update Board"
 

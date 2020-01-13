@@ -1,4 +1,6 @@
 class SubscriptionsController < ApplicationController
+  skip_before_action :authenticate_user!
+  # before_action :authenticate_admin!  
   before_action :set_subscription, only: [:show, :edit, :update, :destroy]
 
   # GET /subscriptions

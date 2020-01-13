@@ -2,6 +2,7 @@ require 'test_helper'
 
 class PlansControllerTest < ActionDispatch::IntegrationTest
   setup do
+    test_admin_login!
     @plan = plans(:solo)
   end
 

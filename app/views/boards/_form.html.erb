@@ -16,6 +16,11 @@
     <%= form.text_field :name %>
   </div>
 
+  <% unless user_signed_in? %>
+    <%= form.label :organisation_id %>
+    <%= form.select :organisation_id, options_from_collection_for_select(Organisation.all, 'id','name') %>
+  <% end %>
+
   <div class="actions">
     <%= form.submit %>
   </div>

@@ -43,7 +43,7 @@
 
   <div class="field">
     <%= form.label :duration_type %>
-    <%= form.number_field :duration_type %>
+    <%= form.select :duration_type, Subscription.duration_types.keys, id: :subscription_duration_type %>
   </div>
 
   <div class="actions">

@@ -38,6 +38,11 @@ To run all tests (model, controller and integration tests).
 rails test
 ``` 
 
+To run system tests
+``` 
+rails test:system
+```
+
 ## Explore deployed application
 Visit it [here](https://safe-fjord-82834.herokuapp.com/). Best viewed on Google Chrome.
 

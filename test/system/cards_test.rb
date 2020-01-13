@@ -1,6 +1,8 @@
 require "application_system_test_case"
 
 class CardsTest < ApplicationSystemTestCase
+  include ActiveJob::TestHelper
+
   setup do
     @card = cards(:one)
   end
@@ -26,7 +28,7 @@ class CardsTest < ApplicationSystemTestCase
 
   test "updating a Card" do
     visit cards_url
-    click_on "Edit", match: :first
+    click_on "Edit", match: :first, exact: true
 
     fill_in "Board", with: @card.board_id
     fill_in "Color", with: @card.color
@@ -35,7 +37,6 @@ class CardsTest < ApplicationSystemTestCase
     click_on "Update Card"
 
     assert_text "Card was successfully updated"
-    click_on "Back"
   end
 
   test "destroying a Card" do

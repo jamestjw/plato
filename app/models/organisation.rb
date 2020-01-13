@@ -32,26 +32,33 @@ class Organisation < ApplicationRecord
     end
 
     def subscription_fees
-        plan = plans.last
-        num_users = users.count
-        monthly_fees = plan.monthly_price 
-        yearly_fees = plan.annual_price
+        if plans.any?
+            plan = plans.last
+            num_users = users.count
+            monthly_fees = plan.monthly_price 
+            yearly_fees = plan.annual_price
 
-        if num_users - plan.no_of_users > 0
-            monthly_fees += plan.additional_user_price * (num_users - plan.no_of_users)
-            yearly_fees += plan.additional_user_price * (num_users - plan.no_of_users)
+            if num_users - plan.no_of_users > 0
+                monthly_fees += plan.additional_user_price * (num_users - plan.no_of_users)
+                yearly_fees += plan.additional_user_price * (num_users - plan.no_of_users)
+            end
+
+            unless plan.unlimited_boards 
+                monthly_fees *= boards.count
+                yearly_fees *= boards.count
+            end
+
+            yearly_fees *= 12
+            {   
+                monthly: monthly_fees,
+                yearly: yearly_fees
+            }
+        else 
+            {   
+                monthly: 0,
+                yearly: 0
+            }
         end
-
-        unless plan.unlimited_boards 
-            monthly_fees *= boards.count
-            yearly_fees *= boards.count
-        end
-
-        yearly_fees *= 12
-        {   
-            monthly: monthly_fees,
-            yearly: yearly_fees
-        }
     end
 
     def contains_user?(userobj)

@@ -1,6 +1,8 @@
 require "application_system_test_case"
 
 class TasksTest < ApplicationSystemTestCase
+  include ActiveJob::TestHelper
+
   setup do
     @task = tasks(:one)
   end
@@ -14,22 +16,20 @@ class TasksTest < ApplicationSystemTestCase
     visit tasks_url
     click_on "New Task"
 
+    fill_in 'Card', with: @task.card.id
     check "Completed" if @task.completed
     fill_in "Detail", with: @task.detail
-    fill_in "References", with: @task.references
     click_on "Create Task"
 
     assert_text "Task was successfully created"
-    click_on "Back"
   end
 
   test "updating a Task" do
     visit tasks_url
-    click_on "Edit", match: :first
+    click_on "Edit", match: :first, exact: true
 
     check "Completed" if @task.completed
     fill_in "Detail", with: @task.detail
-    fill_in "References", with: @task.references
     click_on "Update Task"
 
     assert_text "Task was successfully updated"

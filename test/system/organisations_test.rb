@@ -1,6 +1,8 @@
 require "application_system_test_case"
 
 class OrganisationsTest < ApplicationSystemTestCase
+  include ActiveJob::TestHelper
+
   setup do
     @organisation = organisations(:one)
   end
@@ -16,7 +18,7 @@ class OrganisationsTest < ApplicationSystemTestCase
 
     fill_in "Created by", with: @organisation.created_by
     fill_in "Description", with: @organisation.description
-    fill_in "Name", with: @organisation.name
+    fill_in "Name", with: "new organisation"
     click_on "Create Organisation"
 
     assert_text "Organisation was successfully created"
@@ -25,11 +27,11 @@ class OrganisationsTest < ApplicationSystemTestCase
 
   test "updating a Organisation" do
     visit organisations_url
-    click_on "Edit", match: :first
+    click_on "Edit", match: :first, exact: true
 
     fill_in "Created by", with: @organisation.created_by
     fill_in "Description", with: @organisation.description
-    fill_in "Name", with: @organisation.name
+    fill_in "Name", with: "new name"
     click_on "Update Organisation"
 
     assert_text "Organisation was successfully updated"

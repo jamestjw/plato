@@ -1,6 +1,8 @@
 require "application_system_test_case"
 
 class SubscriptionsTest < ApplicationSystemTestCase
+  include ActiveJob::TestHelper
+
   setup do
     @subscription = subscriptions(:one)
   end
@@ -14,12 +16,18 @@ class SubscriptionsTest < ApplicationSystemTestCase
     visit subscriptions_url
     click_on "New Subscription"
 
+    select '2025',  from: 'subscription_end_date_1i'
+    select 'January',  from: 'subscription_end_date_2i'
+    select '1', from: 'subscription_end_date_3i'
+    
+    select '2025',  from: 'subscription_end_date_1i'
+    select 'January',  from: 'subscription_end_date_2i'
+    select '1', from: 'subscription_end_date_3i'
+
     fill_in "Duration", with: @subscription.duration
-    fill_in "Duration type", with: @subscription.duration_type
-    fill_in "End date", with: @subscription.end_date
+    # fill_in "Duration type", with: @subscription.duration_type
     fill_in "Organisation", with: @subscription.organisation_id
     fill_in "Plan", with: @subscription.plan_id
-    fill_in "Start date", with: @subscription.start_date
     fill_in "Total cost", with: @subscription.total_cost
     click_on "Create Subscription"
 
@@ -29,14 +37,22 @@ class SubscriptionsTest < ApplicationSystemTestCase
 
   test "updating a Subscription" do
     visit subscriptions_url
-    click_on "Edit", match: :first
+    click_on "Edit", match: :first, exact: true
 
     fill_in "Duration", with: @subscription.duration
-    fill_in "Duration type", with: @subscription.duration_type
-    fill_in "End date", with: @subscription.end_date
+    # fill_in "Duration type", with: @subscription.duration_type
+
+    select '2025',  from: 'subscription_end_date_1i'
+    select 'January',  from: 'subscription_end_date_2i'
+    select '1', from: 'subscription_end_date_3i'
+
+    select '2025',  from: 'subscription_end_date_1i'
+    select 'January',  from: 'subscription_end_date_2i'
+    select '1', from: 'subscription_end_date_3i'
+
+
     fill_in "Organisation", with: @subscription.organisation_id
     fill_in "Plan", with: @subscription.plan_id
-    fill_in "Start date", with: @subscription.start_date
     fill_in "Total cost", with: @subscription.total_cost
     click_on "Update Subscription"
 

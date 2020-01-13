@@ -35,7 +35,12 @@ class BoardsController < ApplicationController
   def create
     @board = Board.new(board_params)
     @board.active = true
-    @board.organisation = current_user.organisations.first
+
+    unless user_signed_in?
+      @board.organisation = Organisation.find(params[:board][:organisation_id])
+    else
+      @board.organisation = current_user.organisations.first
+    end
 
     respond_to do |format|
       if @board.save
