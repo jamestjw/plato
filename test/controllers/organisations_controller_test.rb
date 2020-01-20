@@ -68,7 +68,7 @@ class OrganisationsControllerTest < ActionDispatch::IntegrationTest
         "new_organisation_description"=>"lorem ipsim dolor sit amet",
         "new_organisation_plan_type"=>"Startup", 
         "new_organisation_duration_type"=>"Monthly", 
-        "new_organisation_end_date"=>"2020-01-18"
+        "new_organisation_end_date"=>150.days.from_now.strftime("%Y-%m-%d")
         } 
       }    
     end
@@ -85,7 +85,7 @@ class OrganisationsControllerTest < ActionDispatch::IntegrationTest
         "new_organisation_description"=>"lorem ipsum dolor sit amet",
         "new_organisation_plan_type"=>"Startup", 
         "new_organisation_duration_type"=>"Monthly", 
-        "new_organisation_end_date"=>"2020-01-18"
+        "new_organisation_end_date"=>150.days.from_now.strftime("%Y-%m-%d")
         } 
       }    
     end
@@ -140,7 +140,7 @@ class OrganisationsControllerTest < ActionDispatch::IntegrationTest
         "new_organisation_description"=>"lorem ipsum dolor sit amet",
         "new_organisation_plan_type"=>"Solo", 
         "new_organisation_duration_type"=>"Monthly", 
-        "new_organisation_end_date"=>"2020-01-18"
+        "new_organisation_end_date"=>150.days.from_now.strftime("%Y-%m-%d")
         } 
       }    
     end

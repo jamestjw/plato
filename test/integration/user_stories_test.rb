@@ -27,7 +27,7 @@ class UserStoriesTest < ActionDispatch::IntegrationTest
         "new_organisation_description"=>"Touch and GoTouch and Go",
         "new_organisation_plan_type"=>"Startup", 
         "new_organisation_duration_type"=>"Monthly", 
-        "new_organisation_end_date"=>"2020-01-18"
+        "new_organisation_end_date"=>150.days.from_now.strftime("%Y-%m-%d")
         } 
       }
     end
@@ -84,7 +84,7 @@ class UserStoriesTest < ActionDispatch::IntegrationTest
         "new_organisation_description"=>"RedRedRed",
         "new_organisation_plan_type"=>"Startup", 
         "new_organisation_duration_type"=>"Monthly", 
-        "new_organisation_end_date"=>"2020-02-25"
+        "new_organisation_end_date"=>150.days.from_now.strftime("%Y-%m-%d")
         } 
       }   
       assert_equal "Kaodim", Organisation.last.name 
